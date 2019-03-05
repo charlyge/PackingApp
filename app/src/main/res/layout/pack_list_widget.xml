@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@color/materialYellow"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/ingredient"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#09c"
+        android:textColor="@color/white"
+        android:layout_margin="8dp"
+        android:layout_gravity="center"
+        android:text="@string/pack_list_upcoming"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/appwidget_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/appwidget_text"
+        android:text="@string/appwidget_text"
+        android:textStyle="bold|italic" />
+
+</LinearLayout>

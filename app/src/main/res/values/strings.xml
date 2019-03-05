@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Start Pack</string>
+
+    <string name="parking_reminder_notification_title">Hello - Hope Uve started packing\?</string>
+    <string name="packing_reminder_notification_body">You still have items unpacked Go to check List and mark off items You have packed. Pack up!</string>
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="my_api_key">AIzaSyAn6RTzswqYJDWCyUfsTm5_Ykoki10S2XM</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="airplane">Airplane</string>
+    <string name="delete">Delete</string>
+    <string name="destination_direction">Destination Direction</string>
+    <string name="view_direction">View Direction</string>
+    <string name="share">Share</string>
+    <string name="pack_list">PACK lIST</string>
+    <string name="pack_list_upcoming">Your Upcoming Trip Pack List</string>
+    <string name="appwidget_text">Empty PackList</string>
+    <string name="add_widget">Add widget</string>
+    <string name="packlist_history">packlist History</string>
+    <string name="add_travel_item">Add Travel Item</string>
+    <string name="travel_mode">Pick Travel Mode</string>
+    <string name="enter_a_destination">Enter a Destination</string>
+    <string name="destination">Destination</string>
+    <string name="travel_time">Travel time</string>
+    <string name="travel_date">Travel Date</string>
+    <string name="enter_travel_purpose">Enter Travel Purpose</string>
+    <string name="travel_purpose">Travel Purpose</string>
+    <string name="select_date">Select Date</string>
+    <string name="enter_time">Enter Time</string>
+    <string name="car">Car</string>
+    <string name="bus">Bus</string>
+    <string name="bike">Bike</string>
+    <string name="set_packing_reminder">Set Packing Reminder</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="travelling_anytime_soon">Travelling Anytime Soon ?</string>
+    <string name="build_your_packlist_now">Build Your PackList now....</string>
+</resources>
