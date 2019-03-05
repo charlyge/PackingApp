@@ -1,7 +1,7 @@
 package com.charlyge.android.packingapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -57,19 +57,21 @@ public class PackingHistoryActivity extends AppCompatActivity {
                 if (e != null) {
                     return;
                 }
-                for (DocumentChange change : queryDocumentSnapshots.getDocumentChanges()) {
-                    packingReminderList = queryDocumentSnapshots.toObjects(PackingReminder.class);
-                    travelHistoryAdapter.setTravelList(packingReminderList);
-                    switch (change.getType()) {
-                        case ADDED:
-                            onDocumentAdded(change);
-                            break;
-                        case MODIFIED:
-                            onDocumentModified(change);
-                            break;
-                        case REMOVED:
-                            onDocumentRemoved(change);
-                            break;
+                if (queryDocumentSnapshots != null) {
+                    for (DocumentChange change : queryDocumentSnapshots.getDocumentChanges()) {
+                        packingReminderList = queryDocumentSnapshots.toObjects(PackingReminder.class);
+                        travelHistoryAdapter.setTravelList(packingReminderList);
+                        switch (change.getType()) {
+                            case ADDED:
+                                onDocumentAdded(change);
+                                break;
+                            case MODIFIED:
+                                onDocumentModified(change);
+                                break;
+                            case REMOVED:
+                                onDocumentRemoved(change);
+                                break;
+                        }
                     }
                 }
             }

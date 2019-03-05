@@ -5,19 +5,16 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.net.Uri;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +25,6 @@ import android.widget.Toast;
 import com.charlyge.android.packingapp.Adapters.SetReminderListAdapter;
 import com.charlyge.android.packingapp.Database.Entities.Items;
 import com.charlyge.android.packingapp.Database.Entities.PackingReminder;
-import com.charlyge.android.packingapp.Database.packDb.PackingReminderDb;
 import com.charlyge.android.packingapp.Repository.AppRepository;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -52,6 +48,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 public class SetReminderActivity extends AppCompatActivity implements SetReminderListAdapter.ItemClickedListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private EditText travelPurpose,destinationEdit,itemsEdit,travelModeEdit;
@@ -138,7 +136,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                     Toast.makeText(SetReminderActivity.this, "Items cannot be Empty ", Toast.LENGTH_SHORT).show();
                   return;
                 }
-         Log.i("Datetime",dateTime);
+                Timber.i(dateTime);
                 try {
                     dateNew = dateFormat.parse(dateTime);
                 } catch (ParseException e) {
@@ -176,7 +174,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                 String date = travelDate.getText().toString();
                 String time = travelTime.getText().toString();
                 String dateTime = date+time;
-                Log.i("Datetime",dateTime);
+                Timber.i(dateTime);
                  if(itemsList.size()==0 || TextUtils.isEmpty(purpose) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time) || TextUtils.isEmpty(destination)){
                     Toast.makeText(SetReminderActivity.this, "Please Enter all Fields ", Toast.LENGTH_SHORT).show();
 
@@ -192,7 +190,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                      } catch (ParseException e) {
                          e.printStackTrace();
                      }
-                     Log.i("DatetimeOnSaveBt",dateFormat.format(dateNew));
+                     Timber.i(dateFormat.format(dateNew));
 
                      final PackingReminder packingReminder = new PackingReminder(destination,travelMode,purpose,dateNew,4);
                      AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -212,13 +210,13 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                     .collection("Trips").add(packingReminder).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
-                    Log.d("FirebaseUpload", "Online sync susesscesful");
+                    Timber.tag("FirebaseUpload").d("Online sync susesscesful");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
 
-                    Log.d("FirebaseUpload", e.getLocalizedMessage());
+                    Timber.d(e.getLocalizedMessage());
                 }
             });
 //
@@ -263,19 +261,19 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Log.i(TAG, "API Client Connection Successful!");
+        Timber.i(TAG, "API Client Connection Successful!");
 
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i(TAG, "API Client Connection Suspended!");
+        Timber.i(TAG, "API Client Connection Suspended!");
 
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.e(TAG, "API Client Connection Failed!");
+        Timber.e(TAG, "API Client Connection Failed!");
 
     }
 
@@ -317,7 +315,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
         if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             Place place = PlacePicker.getPlace(this, data);
             if (place == null) {
-                Log.i(TAG, "No place selected");
+                Timber.i("No place selected");
                 return;
             }
             destinationEdit.setText(place.getName());

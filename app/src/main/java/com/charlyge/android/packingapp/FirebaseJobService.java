@@ -32,6 +32,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 
 public class FirebaseJobService extends JobService {
     private int statusCount = 0;
@@ -41,7 +43,7 @@ public class FirebaseJobService extends JobService {
 
     @Override
     public boolean onStartJob(final JobParameters jobParameters) {
-        Log.d("ServiceNotification", " Onstart Job");
+        Timber.d(" Onstart Job");
         final FirebaseJobService context = FirebaseJobService.this;
         final AppRepository appRepository = new AppRepository(context.getApplication());
 
@@ -58,7 +60,7 @@ public class FirebaseJobService extends JobService {
                     return new ArrayList<>();
                 } else {
                     Date timeOfTravel = taskEntryList.get(0).getTimeOfTravel();
-                    Log.d("ServiceNotification", " time of travel is " + dateFormat.format(timeOfTravel));
+                    Timber.d(" time of travel is " + dateFormat.format(timeOfTravel));
                     List<Items> itemlist = PackingReminderDb.getsInstance(context).itemsDao().getItemsByTime(timeOfTravel);
                     for (Items items : itemlist) {
                         if (items.getStatus()) {
@@ -74,7 +76,7 @@ public class FirebaseJobService extends JobService {
                     NotificationUtils.sendNotification(context,
                             "You still have items unpacked Go to check List and mark " +
                                     "off items You have packed. Keep packing!", "Packing Reminder");
-                    Log.d("ServiceNotification", " sent");
+                    Timber.d(" sent");
                 }
                 return null;
             }

@@ -9,13 +9,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,21 +27,17 @@ import com.charlyge.android.packingapp.Database.Entities.PackingReminder;
 import com.charlyge.android.packingapp.Repository.AppRepository;
 import com.charlyge.android.packingapp.ViewModel.PackingReminderViewModel;
 import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements PackingRemindersAdapter.OnShareIconClickListener, PackingRemindersAdapter.OnLocationIconClickListener {
     private RecyclerView recyclerView;
     private AppRepository appRepository;
-    private String TAG = MainActivity.class.getSimpleName();
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private int RC_SIGN_IN = 898;
@@ -125,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .build(),
-                RC_SIGN_IN);;
+                RC_SIGN_IN);
 
     }
 
@@ -165,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Log.d(TAG, "Couldn't call " + geoLocation.toString()
+            Timber.d("Couldn't call " + geoLocation.toString()
                     + ", no receiving apps installed!");
         }
     }
