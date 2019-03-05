@@ -38,7 +38,7 @@ import timber.log.Timber;
 public class FirebaseJobService extends JobService {
     private int statusCount = 0;
     private AsyncTask mBackgroundTask;
-    private static final String DATE_FORMAT = "dd/MM/yyyyhh:mm";
+    private static final String DATE_FORMAT = "MMMMM/yyyy HH:mm";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
     @Override

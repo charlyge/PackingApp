@@ -63,9 +63,8 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
     public static final String TAG = SetReminderActivity.class.getSimpleName();
     private List<Items> itemsList = new ArrayList<>();
     private SetReminderListAdapter setReminderListAdapter;
-    private String date,time;
     // Constant for date format
-    private static final String DATE_FORMAT = "dd/MM/yyyyhh:mm";
+    private static final String DATE_FORMAT = "MMMMM/yyyy HH:mm";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     private int ADD_PLACE_REQUEST_CODE = 89;
     private int PLACE_PICKER_REQUEST = 987;
