@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 android {
+    signingConfigs {
+        config {
+            keyAlias 'charlyge'
+            keyPassword 'password'
+            storeFile file('charlyge.jks')
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.charlyge.android.packingapp"
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }

@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
         setContentView(R.layout.activity_main);
          mFirebaseAuth = FirebaseAuth.getInstance();
          mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        } else {
+            Timber.plant(new ReleaseTree());
+        }
         final LinearLayout noItem = findViewById(R.id.no_item);
         if (Build.VERSION.SDK_INT > 25) {
             //Start the widget service to update the widget
