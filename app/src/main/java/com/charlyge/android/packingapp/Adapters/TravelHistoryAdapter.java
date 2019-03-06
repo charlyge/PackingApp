@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class TravelHistoryAdapter extends RecyclerView.Adapter<TravelHistoryAdapter.TravelHistoryViewHolder> {
-    private static final String DATE_FORMAT = "MMMMM/yyyy HH:mm";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     private List<PackingReminder> packingReminderList;
 

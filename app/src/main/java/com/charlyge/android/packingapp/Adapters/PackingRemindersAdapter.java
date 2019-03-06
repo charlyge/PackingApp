@@ -26,7 +26,7 @@ import java.util.Locale;
 public class PackingRemindersAdapter extends RecyclerView.Adapter<PackingRemindersAdapter.myViewHolder> {
     private List<PackingReminder> packingReminderList;
     private Context context;
-    private static final String DATE_FORMAT = "MMMMM/yyyy HH:mm";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     private AppRepository appRepository;
     private OnShareIconClickListener onShareIconClickListener;
