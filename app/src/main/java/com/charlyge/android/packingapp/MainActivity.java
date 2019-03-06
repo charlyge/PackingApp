@@ -14,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-import timber.log.Timber;
+
 
 public class MainActivity extends AppCompatActivity implements PackingRemindersAdapter.OnShareIconClickListener, PackingRemindersAdapter.OnLocationIconClickListener {
     private RecyclerView recyclerView;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private int RC_SIGN_IN = 898;
+    private String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,6 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
         setContentView(R.layout.activity_main);
          mFirebaseAuth = FirebaseAuth.getInstance();
          mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        } else {
-            Timber.plant(new ReleaseTree());
-        }
         final LinearLayout noItem = findViewById(R.id.no_item);
         if (Build.VERSION.SDK_INT > 25) {
             //Start the widget service to update the widget
@@ -164,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Timber.d("Couldn't call " + geoLocation.toString()
+            Log.d(TAG, "Couldn't call " + geoLocation.toString()
                     + ", no receiving apps installed!");
         }
     }

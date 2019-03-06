@@ -16,6 +16,7 @@ import com.charlyge.android.packingapp.Database.Entities.Items;
 import com.charlyge.android.packingapp.Database.Entities.PackingReminder;
 import com.charlyge.android.packingapp.R;
 import com.charlyge.android.packingapp.Repository.AppRepository;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,7 +80,8 @@ public class PackingRemindersAdapter extends RecyclerView.Adapter<PackingReminde
         if (modeOftravel.equals("Bike")) {
             imageResource = R.drawable.ic_directions_bike_black_24dp;
         }
-        myViewHolder.travelMode.setImageResource(imageResource);
+//        myViewHolder.travelMode.setImageResource(imageResource);
+        Picasso.get().load(imageResource).into(myViewHolder.travelMode);
         myViewHolder.destination.setText("Trip to " + packingReminder.getDestination());
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override

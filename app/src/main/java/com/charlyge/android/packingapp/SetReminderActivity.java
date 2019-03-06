@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +50,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import timber.log.Timber;
 
 public class SetReminderActivity extends AppCompatActivity implements SetReminderListAdapter.ItemClickedListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private EditText travelPurpose,destinationEdit,itemsEdit,travelModeEdit;
@@ -135,7 +135,6 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                     Toast.makeText(SetReminderActivity.this, "Items cannot be Empty ", Toast.LENGTH_SHORT).show();
                   return;
                 }
-                Timber.i(dateTime);
                 try {
                     dateNew = dateFormat.parse(dateTime);
                 } catch (ParseException e) {
@@ -173,7 +172,6 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                 String date = travelDate.getText().toString();
                 String time = travelTime.getText().toString();
                 String dateTime = date+time;
-                Timber.i(dateTime);
                  if(itemsList.size()==0 || TextUtils.isEmpty(purpose) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time) || TextUtils.isEmpty(destination)){
                     Toast.makeText(SetReminderActivity.this, "Please Enter all Fields ", Toast.LENGTH_SHORT).show();
 
@@ -189,7 +187,6 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                      } catch (ParseException e) {
                          e.printStackTrace();
                      }
-                     Timber.i(dateFormat.format(dateNew));
 
                      final PackingReminder packingReminder = new PackingReminder(destination,travelMode,purpose,dateNew,4);
                      AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -209,13 +206,13 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                     .collection("Trips").add(packingReminder).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
-                    Timber.tag("FirebaseUpload").d("Online sync susesscesful");
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
 
-                    Timber.d(e.getLocalizedMessage());
+                    Log.d(TAG, e.getLocalizedMessage());
                 }
             });
 //
@@ -260,19 +257,19 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Timber.i(TAG, "API Client Connection Successful!");
+        Log.i(TAG, "API Client Connection Successful!");
 
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Timber.i(TAG, "API Client Connection Suspended!");
+        Log.i(TAG, "API Client Connection Suspended!");
 
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Timber.e(TAG, "API Client Connection Failed!");
+        Log.e(TAG, "API Client Connection Failed!");
 
     }
 
@@ -314,7 +311,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
         if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
             Place place = PlacePicker.getPlace(this, data);
             if (place == null) {
-                Timber.i("No place selected");
+
                 return;
             }
             destinationEdit.setText(place.getName());

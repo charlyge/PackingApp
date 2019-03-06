@@ -32,7 +32,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import timber.log.Timber;
 
 
 public class FirebaseJobService extends JobService {
@@ -40,10 +39,11 @@ public class FirebaseJobService extends JobService {
     private AsyncTask mBackgroundTask;
     private static final String DATE_FORMAT = "MMMMM/yyyy HH:mm";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+    private String TAG = FirebaseJobService.class.getSimpleName();
 
     @Override
     public boolean onStartJob(final JobParameters jobParameters) {
-        Timber.d(" Onstart Job");
+        Log.d(TAG, " Onstart Job");
         final FirebaseJobService context = FirebaseJobService.this;
         final AppRepository appRepository = new AppRepository(context.getApplication());
 
@@ -60,7 +60,7 @@ public class FirebaseJobService extends JobService {
                     return new ArrayList<>();
                 } else {
                     Date timeOfTravel = taskEntryList.get(0).getTimeOfTravel();
-                    Timber.d(" time of travel is " + dateFormat.format(timeOfTravel));
+                    Log.d(TAG, " time of travel is " + dateFormat.format(timeOfTravel));
                     List<Items> itemlist = PackingReminderDb.getsInstance(context).itemsDao().getItemsByTime(timeOfTravel);
                     for (Items items : itemlist) {
                         if (items.getStatus()) {
@@ -76,7 +76,6 @@ public class FirebaseJobService extends JobService {
                     NotificationUtils.sendNotification(context,
                             "You still have items unpacked Go to check List and mark " +
                                     "off items You have packed. Keep packing!", "Packing Reminder");
-                    Timber.d(" sent");
                 }
                 return null;
             }

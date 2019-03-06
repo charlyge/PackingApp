@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.charlyge.android.packingapp.Database.Entities.PackingReminder;
 import com.charlyge.android.packingapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -49,7 +50,8 @@ public class TravelHistoryAdapter extends RecyclerView.Adapter<TravelHistoryAdap
         if (modeOftravel.equals("Bike")) {
             imageResource = R.drawable.ic_directions_bike_black_24dp;
         }
-        travelHistoryViewHolder.travelMode.setImageResource(imageResource);
+        // travelHistoryViewHolder.travelMode.setImageResource(imageResource);
+        Picasso.get().load(imageResource).into(travelHistoryViewHolder.travelMode);
         travelHistoryViewHolder.destination.setText("Trip to " + packingReminder.getDestination());
     }
 
