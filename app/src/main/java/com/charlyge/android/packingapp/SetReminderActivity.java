@@ -52,7 +52,8 @@ import java.util.Locale;
 
 
 public class SetReminderActivity extends AppCompatActivity implements SetReminderListAdapter.ItemClickedListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private EditText travelPurpose,destinationEdit,itemsEdit,travelModeEdit;
+    // Constant for date format
+    private static final String DATE_FORMAT = "dd/MM/yyyyhh:mm";
     private Button activatePacking_bt;
     private ImageView addItems;
     private FirebaseFirestore firebaseFirestore;
@@ -63,8 +64,7 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
     public static final String TAG = SetReminderActivity.class.getSimpleName();
     private List<Items> itemsList = new ArrayList<>();
     private SetReminderListAdapter setReminderListAdapter;
-    // Constant for date format
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private EditText travelPurpose, destinationEdit, itemsEdit;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     private int ADD_PLACE_REQUEST_CODE = 89;
     private int PLACE_PICKER_REQUEST = 987;

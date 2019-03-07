@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
         int id = item.getItemId();
         if (id == R.id.packlist_history) {
             if(mFirebaseUser==null){
-                startSignIn();
+                Toast.makeText(this, "Sign in to view History", Toast.LENGTH_SHORT).show();
             }
             else {
                 Intent intent = new Intent(this,PackingHistoryActivity.class);

@@ -24,7 +24,9 @@
                 android:resource="@xml/pack_list_widget_info" />
         </receiver>
 
-        <activity android:name=".PackingHistoryActivity" />
+        <activity
+            android:name=".PackingHistoryActivity"
+            android:label="TravelHistory" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
