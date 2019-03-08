@@ -321,10 +321,11 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
 
     private void getPlaceInfo() {
 
-        PlacePicker.IntentBuilder builder =
-                new PlacePicker.IntentBuilder();
+
         try {
             // Launch the PlacePicker.
+            PlacePicker.IntentBuilder builder =
+                    new PlacePicker.IntentBuilder();
             startActivityForResult(builder.build(SetReminderActivity.this)
                     , PLACE_PICKER_REQUEST);
         } catch (GooglePlayServicesRepairableException

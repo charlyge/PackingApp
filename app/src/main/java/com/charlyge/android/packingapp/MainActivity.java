@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
+                        .setIsSmartLockEnabled(false)
                         .build(),
                 RC_SIGN_IN);
 
@@ -133,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements PackingRemindersA
             startActivity(intent);
         }
         else {
+
             Toast.makeText(this, "Sign In Failed", Toast.LENGTH_SHORT).show();
         }
     }
