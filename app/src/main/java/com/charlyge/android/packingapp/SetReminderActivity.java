@@ -174,10 +174,10 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                 String dateTime = date+time;
                  if(itemsList.size()==0 || TextUtils.isEmpty(purpose) || TextUtils.isEmpty(date) || TextUtils.isEmpty(time) || TextUtils.isEmpty(destination)){
                     Toast.makeText(SetReminderActivity.this, "Please Enter all Fields ", Toast.LENGTH_SHORT).show();
-
-                 }else if(TextUtils.isEmpty(travelMode)){
+                      return;
+                 }if(TextUtils.isEmpty(travelMode)){
                      Toast.makeText(SetReminderActivity.this, " select Travel Mode ", Toast.LENGTH_SHORT).show();
-
+                  return;
 
                  }
                  else {
@@ -197,27 +197,11 @@ public class SetReminderActivity extends AppCompatActivity implements SetReminde
                                  Items items = itemsList.get(i);
                               appRepository.insertItems(items);
                              }
-
                               appRepository.insertPackingRm(packingReminder);
+                             firebaseFirestore.collection("UsersTrips").document(mFirebaseUser.getUid())
+                                     .collection("Trips").add(packingReminder);
                          }
                      });
-
-                     firebaseFirestore.collection("UsersTrips").document(mFirebaseUser.getUid())
-                    .collection("Trips").add(packingReminder).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                    Log.d(TAG, e.getLocalizedMessage());
-                }
-            });
-//
-//                             firebaseFirestore.collection("UsersTrips").document("UserId")
-//                                     .collection("TripsItems").add(itemsList);
 
                  }
 
